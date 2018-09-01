@@ -1,0 +1,81 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "type": "string",
+        "metadata": {
+          "description": "Location of the resources."
+        }
+      }
+    },
+    "resources": [
+      {
+        "apiVersion": "2018-07-01-preview",
+        "name": "TeamAssemblerApp",
+        "type": "Microsoft.ServiceFabricMesh/applications",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "Microsoft.ServiceFabricMesh/networks/TeamAssemblerNetwork"
+        ],
+        "properties": {
+          "description": "Azure Service Fabric Mesh Team Assembler Application.",
+          "services": [
+            {
+              "name": "WebUI",
+              "properties": {
+                "description": "Front-end for the Team Assembler application.",
+                "osType": "linux",
+                "codePackages": [
+                  {
+                    "name": "WebUI",
+                    "image": "amolenk.azurecr.io/webui:latest",
+                    "endpoints": [
+                      {
+                        "name": "WebUIListener",
+                        "port": 80
+                      }
+                    ],
+                    "resources": {
+                      "requests": {
+                        "cpu": 0.5,
+                        "memoryInGB": 0.5
+                      }
+                    }
+                  }
+                ],
+                "replicaCount": 1,
+                "networkRefs": [
+                  {
+                    "name": "[resourceId('Microsoft.ServiceFabricMesh/networks', 'teamAssemblerNetwork')]"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "apiVersion": "2018-07-01-preview",
+        "name": "teamAssemblerNetwork",
+        "type": "Microsoft.ServiceFabricMesh/networks",
+        "location": "[parameters('location')]",
+        "dependsOn": [],
+        "properties": {
+          "description": "Azure Service Fabric Mesh Team Assembler Application network.",
+          "addressPrefix": "10.0.0.4/22",
+          "ingressConfig": {
+            "layer4": [
+              {
+                "name": "teamAssemblerIngress",
+                "publicPort": "80",
+                "applicationName": "TeamAssemblerApp",
+                "serviceName": "WebUI",
+                "endpointName": "WebUIListener"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
