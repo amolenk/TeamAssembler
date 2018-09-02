@@ -47,7 +47,7 @@
                 "codePackages": [
                   {
                     "name": "WebUI",
-                    "image": "webui:latest",
+                    "image": "teamassembler-webui:latest",
                     "imageRegistryCredential": {
                       "server": "[parameters('registry-server')]",
                       "username": "[parameters('registry-username')]",
