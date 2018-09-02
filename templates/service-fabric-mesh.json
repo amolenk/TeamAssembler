@@ -7,6 +7,24 @@
         "metadata": {
           "description": "Location of the resources."
         }
+      },
+      "registry-server": {
+        "type": "string",
+        "metadata": {
+          "description": "Private image registry server. For example, <myacr>.azurecr.io"
+        }
+      },
+      "registry-username": {
+        "type": "string",
+        "metadata": {
+          "description": "User name for the private image registry server. For Azure Container Registry the CLI command 'az acr credential show --name <myacr> --query \"username\"' will show the username."
+        }
+      },
+      "registry-password": {
+        "type": "securestring",
+        "metadata": {
+          "description": "Password for the private image registry server. For Azure Container Registry the CLI command 'az acr credential show --name <myacr> --query \"passwords[0].value\"' will show the password."
+        }
       }
     },
     "resources": [
@@ -29,7 +47,12 @@
                 "codePackages": [
                   {
                     "name": "WebUI",
-                    "image": "amolenk.azurecr.io/webui:latest",
+                    "image": "webui:latest",
+                    "imageRegistryCredential": {
+                      "server": "[parameters('registry-server')]",
+                      "username": "[parameters('registry-username')]",
+                      "password": "[parameters('registry-password')]"
+                    },
                     "endpoints": [
                       {
                         "name": "WebUIListener",
