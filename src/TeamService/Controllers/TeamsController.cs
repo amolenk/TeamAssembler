@@ -12,7 +12,7 @@ namespace TeamService.Controllers
     [Route("api/[controller]")]
     public class TeamsController : Controller
     {
-        private const string DataFolder = "Data";
+        private const string DataFolder = "data";
 
         public TeamsController()
         {

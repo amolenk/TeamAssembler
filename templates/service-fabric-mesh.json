@@ -40,14 +40,14 @@
           "description": "Azure Service Fabric Mesh Team Assembler Application.",
           "services": [
             {
-              "name": "WebUI",
+              "name": "FrontEnd",
               "properties": {
                 "description": "Front-end for the Team Assembler application.",
                 "osType": "linux",
                 "codePackages": [
                   {
-                    "name": "WebUI",
-                    "image": "teamassembler-webui:latest",
+                    "name": "FrontEnd",
+                    "image": "teamassembler-frontend:latest",
                     "imageRegistryCredential": {
                       "server": "[parameters('registry-server')]",
                       "username": "[parameters('registry-username')]",
@@ -55,8 +55,94 @@
                     },
                     "endpoints": [
                       {
-                        "name": "WebUIListener",
+                        "name": "FrontEndListener",
                         "port": 80
+                      }
+                    ],
+                    "environmentVariables": [
+                      {
+                        "name": "ASPNETCORE_ENVIRONMENT",
+                        "value": "Development"
+                      },
+                      {
+                        "name": "Services_Superhero_Url",
+                        "value": "http://SuperheroService.TeamAssemblerApp:8080"
+                      },
+                      {
+                        "name": "Services_Team_Url",
+                        "value": "http://TeamService.TeamAssemblerApp:8081"
+                      }
+                    ],
+                    "resources": {
+                      "requests": {
+                        "cpu": 0.5,
+                        "memoryInGB": 0.5
+                      }
+                    }
+                  }
+                ],
+                "replicaCount": 1,
+                "networkRefs": [
+                  {
+                    "name": "[resourceId('Microsoft.ServiceFabricMesh/networks', 'teamAssemblerNetwork')]"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "SuperheroService",
+              "properties": {
+                "description": "Provides names and power grid data for superheroes.",
+                "osType": "linux",
+                "codePackages": [
+                  {
+                    "name": "SuperheroService",
+                    "image": "teamassembler-superheroservice:latest",
+                    "imageRegistryCredential": {
+                      "server": "[parameters('registry-server')]",
+                      "username": "[parameters('registry-username')]",
+                      "password": "[parameters('registry-password')]"
+                    },
+                    "endpoints": [
+                      {
+                        "name": "SuperheroServiceListener",
+                        "port": 8080
+                      }
+                    ],
+                    "resources": {
+                      "requests": {
+                        "cpu": 0.5,
+                        "memoryInGB": 0.5
+                      }
+                    }
+                  }
+                ],
+                "replicaCount": 1,
+                "networkRefs": [
+                  {
+                    "name": "[resourceId('Microsoft.ServiceFabricMesh/networks', 'teamAssemblerNetwork')]"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "TeamService",
+              "properties": {
+                "description": "Stores assembled teams data.",
+                "osType": "linux",
+                "codePackages": [
+                  {
+                    "name": "TeamService",
+                    "image": "teamassembler-teamservice:latest",
+                    "imageRegistryCredential": {
+                      "server": "[parameters('registry-server')]",
+                      "username": "[parameters('registry-username')]",
+                      "password": "[parameters('registry-password')]"
+                    },
+                    "endpoints": [
+                      {
+                        "name": "TeamServiceListener",
+                        "port": 8081
                       }
                     ],
                     "resources": {
@@ -93,8 +179,8 @@
                 "name": "teamAssemblerIngress",
                 "publicPort": "80",
                 "applicationName": "TeamAssemblerApp",
-                "serviceName": "WebUI",
-                "endpointName": "WebUIListener"
+                "serviceName": "",
+                "endpointName": "FrontEndListener"
               }
             ]
           }

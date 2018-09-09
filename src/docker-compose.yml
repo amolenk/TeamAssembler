@@ -4,7 +4,7 @@ version: '3.4'
 # For now, set all debug environment settings here.
 
 services:
-  teamassembler.webui:
+  teamassembler.frontend:
     image: amolenk.azurecr.io/teamassembler-frontend
     build:
       context: .
@@ -15,6 +15,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - Services_Superhero_Url=http://teamassembler.superheroservice
       - Services_Team_Url=http://teamassembler.teamservice
+    depends_on: 
+      - teamassembler.superheroservice
+      - teamassembler.teamservice
 
   teamassembler.superheroservice:
     image: amolenk.azurecr.io/teamassembler-superheroservice
@@ -31,3 +34,5 @@ services:
       dockerfile: TeamService/Dockerfile
     ports:
       - "8081:80"
+    volumes:
+      - "~/teams:/app/data"
