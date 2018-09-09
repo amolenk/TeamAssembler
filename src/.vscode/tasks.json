@@ -7,9 +7,13 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/TeamService/TeamService.csproj"
+                "${workspaceFolder}/TeamAssembler.sln"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

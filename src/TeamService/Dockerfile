@@ -1,13 +1,13 @@
 
-FROM microsoft/dotnet:2.0-runtime AS base
+FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
 WORKDIR /app
+EXPOSE 80
 
-FROM microsoft/dotnet:2.0-sdk AS build
+FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY TeamService.csproj TeamService/
+COPY . .
 RUN dotnet restore TeamService/TeamService.csproj
 WORKDIR /src/TeamService
-COPY . .
 RUN dotnet build TeamService.csproj -c Release -o /app
 
 FROM build AS publish

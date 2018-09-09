@@ -1,0 +1,32 @@
+version: '3.4'
+
+# Visual Studio Code doesn't look at the compose.override.yml file (https://github.com/Microsoft/vscode-docker/issues/379).
+# For now, set all debug environment settings here.
+
+services:
+  # teamassembler.webui:
+  #   image: amolenk.azurecr.io/teamassembler-webui
+  #   build:
+  #     context: .
+  #     dockerfile: WebUI/Dockerfile
+  #   ports:
+  #     - "80:80"
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - Services_Superhero_Url=http://teamassembler.superheroservice
+
+  teamassembler.superheroservice:
+    image: amolenk.azurecr.io/teamassembler-superheroservice
+    build:
+      context: .
+      dockerfile: SuperheroService/Dockerfile
+    ports:
+      - "8080:80"
+
+  teamassembler.teamservice:
+    image: amolenk.azurecr.io/teamassembler-teamservice
+    build:
+      context: .
+      dockerfile: TeamService/Dockerfile
+    ports:
+      - "8081:80"
