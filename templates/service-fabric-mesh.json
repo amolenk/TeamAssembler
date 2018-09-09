@@ -179,7 +179,7 @@
                 "name": "teamAssemblerIngress",
                 "publicPort": "80",
                 "applicationName": "TeamAssemblerApp",
-                "serviceName": "",
+                "serviceName": "FrontEnd",
                 "endpointName": "FrontEndListener"
               }
             ]
