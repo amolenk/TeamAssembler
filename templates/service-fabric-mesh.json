@@ -66,11 +66,11 @@
                       },
                       {
                         "name": "Services_Superhero_Url",
-                        "value": "http://superheroservice.teamassemblerapp"
+                        "value": "http://superheroservice.teamassemblerapp:8080"
                       },
                       {
                         "name": "Services_Team_Url",
-                        "value": "http://teamservice.teamassemblerapp"
+                        "value": "http://teamservice.teamassemblerapp:8081"
                       }
                     ],
                     "resources": {
@@ -109,6 +109,16 @@
                         "port": 8080
                       }
                     ],
+                    "environmentVariables": [
+                      {
+                        "name": "ASPNETCORE_ENVIRONMENT",
+                        "value": "Development"
+                      },
+                      {
+                        "name": "ASPNETCORE_URLS",
+                        "value": "http://+:8080"
+                      }
+                    ],
                     "resources": {
                       "requests": {
                         "cpu": 0.5,
@@ -143,6 +153,16 @@
                       {
                         "name": "TeamServiceListener",
                         "port": 8081
+                      }
+                    ],
+                    "environmentVariables": [
+                      {
+                        "name": "ASPNETCORE_ENVIRONMENT",
+                        "value": "Development"
+                      },
+                      {
+                        "name": "ASPNETCORE_URLS",
+                        "value": "http://+:8081"
                       }
                     ],
                     "resources": {
