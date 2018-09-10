@@ -66,11 +66,11 @@
                       },
                       {
                         "name": "Services_Superhero_Url",
-                        "value": "http://superheroservice.teamassemblerapp:8080"
+                        "value": "http://superheroservice:8080"
                       },
                       {
                         "name": "Services_Team_Url",
-                        "value": "http://teamservice.teamassemblerapp:8081"
+                        "value": "http://teamservice:8081"
                       }
                     ],
                     "resources": {
