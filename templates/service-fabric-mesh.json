@@ -25,6 +25,24 @@
         "metadata": {
           "description": "Password for the private image registry server. For Azure Container Registry the CLI command 'az acr credential show --name <myacr> --query \"passwords[0].value\"' will show the password."
         }
+      },
+      "fileShareName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the Azure Files file share that provides the volume for the container."
+        }
+      },
+      "storageAccountName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the Azure storage account that contains the file share."
+        }
+      },
+      "storageAccountKey": {
+        "type": "securestring",
+        "metadata": {
+          "description": "Access key for the Azure storage account that contains the file share."
+        }
       }
     },
     "resources": [
@@ -170,7 +188,13 @@
                         "cpu": 0.5,
                         "memoryInGB": 0.5
                       }
-                    }
+                    },
+                    "volumeRefs": [
+                      {
+                        "name": "[resourceId('Microsoft.ServiceFabricMesh/volumes', 'teamAssemblerVolume')]",
+                        "destinationPath": "/app/data"
+                      }
+                    ]
                   }
                 ],
                 "replicaCount": 1,
@@ -203,6 +227,22 @@
                 "endpointName": "FrontEndListener"
               }
             ]
+          }
+        }
+      },
+      {
+        "apiVersion": "2018-07-01-preview",
+        "name": "teamAssemblerVolume",
+        "type": "Microsoft.ServiceFabricMesh/volumes",
+        "location": "[parameters('location')]",
+        "dependsOn": [],
+        "properties": {
+          "description": "Azure Files storage volume for TeamAssembler App.",
+          "provider": "SFAzureFile",
+          "azureFileParameters": {
+            "shareName": "[parameters('fileShareName')]",
+            "accountName": "[parameters('storageAccountName')]",
+            "accountKey": "[parameters('storageAccountKey')]"
           }
         }
       }
