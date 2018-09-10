@@ -66,11 +66,11 @@
                       },
                       {
                         "name": "Services_Superhero_Url",
-                        "value": "http://SuperheroService.TeamAssemblerApp:8080"
+                        "value": "http://superheroservice.teamassemblerapp"
                       },
                       {
                         "name": "Services_Team_Url",
-                        "value": "http://TeamService.TeamAssemblerApp:8081"
+                        "value": "http://teamservice.teamassemblerapp"
                       }
                     ],
                     "resources": {
@@ -106,7 +106,7 @@
                     "endpoints": [
                       {
                         "name": "SuperheroServiceListener",
-                        "port": 8080
+                        "port": 80
                       }
                     ],
                     "resources": {
@@ -142,7 +142,7 @@
                     "endpoints": [
                       {
                         "name": "TeamServiceListener",
-                        "port": 8081
+                        "port": 80
                       }
                     ],
                     "resources": {
