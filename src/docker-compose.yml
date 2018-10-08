@@ -5,7 +5,7 @@ version: '3.4'
 
 services:
   teamassembler.frontend:
-    image: amolenk.azurecr.io/teamassembler-frontend
+    image: amolenk.azurecr.io/teamassembler-frontend:v1
     build:
       context: .
       dockerfile: FrontEnd/Dockerfile
@@ -15,24 +15,17 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - Services_Superhero_Url=http://teamassembler.superheroservice
       - Services_Team_Url=http://teamassembler.teamservice
-    depends_on: 
-      - teamassembler.superheroservice
-      - teamassembler.teamservice
 
   teamassembler.superheroservice:
-    image: amolenk.azurecr.io/teamassembler-superheroservice
+    image: amolenk.azurecr.io/teamassembler-superheroservice:v1
     build:
       context: .
       dockerfile: SuperheroService/Dockerfile
-    ports:
-      - "8080:80"
 
   teamassembler.teamservice:
-    image: amolenk.azurecr.io/teamassembler-teamservice
+    image: amolenk.azurecr.io/teamassembler-teamservice:v1
     build:
       context: .
       dockerfile: TeamService/Dockerfile
-    ports:
-      - "8081:80"
     volumes:
       - "~/teams:/app/data"

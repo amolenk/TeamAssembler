@@ -65,7 +65,7 @@
                 "codePackages": [
                   {
                     "name": "FrontEnd",
-                    "image": "teamassembler-frontend:latest",
+                    "image": "teamassembler-frontend:v1",
                     "imageRegistryCredential": {
                       "server": "[parameters('registry-server')]",
                       "username": "[parameters('registry-username')]",
@@ -115,7 +115,7 @@
                 "codePackages": [
                   {
                     "name": "SuperheroService",
-                    "image": "teamassembler-superheroservice:latest",
+                    "image": "teamassembler-superheroservice:v1",
                     "imageRegistryCredential": {
                       "server": "[parameters('registry-server')]",
                       "username": "[parameters('registry-username')]",
@@ -161,7 +161,7 @@
                 "codePackages": [
                   {
                     "name": "TeamService",
-                    "image": "teamassembler-teamservice:latest",
+                    "image": "teamassembler-teamservice:v1",
                     "imageRegistryCredential": {
                       "server": "[parameters('registry-server')]",
                       "username": "[parameters('registry-username')]",
