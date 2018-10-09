@@ -65,7 +65,7 @@
                 "codePackages": [
                   {
                     "name": "FrontEnd",
-                    "image": "amolenk.azurecr.io/teamassembler-frontend",
+                    "image": "amolenk.azurecr.io/teamassembler-frontend:latest",
                     "imageRegistryCredential": {
                       "server": "[parameters('registry-server')]",
                       "username": "[parameters('registry-username')]",
@@ -115,7 +115,7 @@
                 "codePackages": [
                   {
                     "name": "SuperheroService",
-                    "image": "amolenk.azurecr.io/teamassembler-superheroservice",
+                    "image": "amolenk.azurecr.io/teamassembler-superheroservice:latest",
                     "imageRegistryCredential": {
                       "server": "[parameters('registry-server')]",
                       "username": "[parameters('registry-username')]",
@@ -161,7 +161,7 @@
                 "codePackages": [
                   {
                     "name": "TeamService",
-                    "image": "amolenk.azurecr.io/teamassembler-teamservice",
+                    "image": "amolenk.azurecr.io/teamassembler-teamservice:latest",
                     "imageRegistryCredential": {
                       "server": "[parameters('registry-server')]",
                       "username": "[parameters('registry-username')]",
